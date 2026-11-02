@@ -1,4 +1,6 @@
+export(get_rice_txdb)
 export(msu_to_rap)
+importFrom(AnnotationHub,AnnotationHub)
 importFrom(stats,setNames)
 
 ### The TxDb.Osativa.MSU.RGAP7 object is not shipped in, or exported by,
