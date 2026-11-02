@@ -39,7 +39,7 @@ meta <- data.frame(
     DispatchClass = "SQLiteFile",
     Location_Prefix = "https://zenodo.org/",
     RDataPath = paste0(
-        "records/21783295/files/",
+        "records/23830226/files/",
         "TxDb.Osativa.MSU.RGAP7.sqlite"
     ),
     ## Tags are colon separated; see
