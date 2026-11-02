@@ -1,23 +1,29 @@
 # TxDb.Osativa.MSU.RGAP7
 
-TxDb.Osativa.MSU.RGAP7 is a Bioconductor-compatible transcript annotation database generated from the official MSU Rice Genome Annotation Project Release 7 (RGAP7) GFF3 annotation. It provides gene, transcript, exon, CDS, and genomic feature annotations for Oryza sativa (Nipponbare, IRGSP-1.0/MSU7).
+**TxDb.Osativa.MSU.RGAP7** is a Bioconductor transcript annotation package for *Oryza sativa* (rice), generated from the Rice Genome Annotation Project (RGAP) Release 7 / MSU7 GFF3 annotation using the IRGSP-1.0 reference genome. It provides gene, transcript, exon, and coding sequence (CDS) annotations keyed by MSU locus identifiers.
 
 ## Installation
+
+This package is currently available in the Bioconductor development repository (Bioconductor 3.24). It requires R 4.6.0 or later.
+
+Install the development version of Bioconductor and then the package:
 
 ```r
 if (!requireNamespace("BiocManager", quietly = TRUE)) {
     install.packages("BiocManager")
 }
-BiocManager::install(c("AnnotationHub", "GenomicFeatures"))
+
+BiocManager::install(version = "devel")
+BiocManager::install("TxDb.Osativa.MSU.RGAP7")
 ```
+
+See the [Bioconductor installation instructions](https://bioconductor.org/install/) for information about the R version required for the development branch.
 
 ## Usage
 
-The TxDb object is not shipped inside the package; it is hosted on
-AnnotationHub and downloaded on first use.
+The TxDb SQLite resource is hosted on AnnotationHub and is downloaded when requested.
 
 ```r
-library(TxDb.Osativa.MSU.RGAP7)
 library(AnnotationHub)
 library(GenomicFeatures)
 
@@ -27,25 +33,27 @@ txdb <- ah[["AH122276"]]
 genes(txdb)
 head(transcripts(txdb))
 exonsBy(txdb, by = "tx")
+cdsBy(txdb, by = "tx")
 ```
 
-### Converting MSU identifiers to RAP-DB identifiers
+The resource describes the IRGSP-1.0 assembly and includes the 12 nuclear chromosomes, unanchored sequences (`ChrUn`), and the Syngenta pseudomolecule (`ChrSy`).
 
-Gene models are keyed by MSU locus identifiers (`LOC_Os##g#####`). Use
-`msu_to_rap()` to translate them to RAP-DB identifiers (`Os##g#######`);
-input order is preserved and unconvertible identifiers are dropped. Requires
-the `riceidconverter` package.
+## Converting MSU identifiers to RAP-DB identifiers
+
+Gene models are keyed by MSU locus identifiers (`LOC_Os##g#####`). The `msu_to_rap()` function translates these to RAP-DB identifiers (`Os##g#######`). Input order is preserved, and identifiers that cannot be converted are omitted. This function requires the `riceidconverter` package.
 
 ```r
 msu_to_rap(c("LOC_Os01g01010", "LOC_Os01g01019", "LOC_Os01g01040"))
 #> [1] "Os01g0100100" "Os01g0100200" "Os01g0100500"
 
-# optionally restrict the result to identifiers present in another object
+# Optionally restrict results to identifiers present in another object
 msu_to_rap(msu_ids, universe = rownames(obj[["RNA"]]))
 ```
 
-See the vignette for a full walkthrough:
+## Vignette
+
+For a complete walkthrough, see the package vignette:
 
 ```r
-vignette("vignette", package = "TxDb.Osativa.MSU.RGAP7")
+browseVignettes("TxDb.Osativa.MSU.RGAP7")
 ```
