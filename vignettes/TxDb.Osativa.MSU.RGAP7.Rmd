@@ -1,0 +1,225 @@
+---
+title: "Transcript Annotation for *Oryza sativa* (RGAP Release 7)"
+author: "Kabilan S"
+date: "2026-11-02"
+output: BiocStyle::html_document
+vignette: >
+  %\\VignetteIndexEntry{Transcript Annotation for Oryza sativa (RGAP Release 7)}
+  %\\VignetteEngine{knitr::rmarkdown}
+  %\\VignetteEncoding{UTF-8}
+---
+
+# Introduction
+
+**TxDb.Osativa.MSU.RGAP7** is a Bioconductor transcript annotation package
+for *Oryza sativa* generated from the official **Rice Genome Annotation
+Project (RGAP) Release 7** GFF3 annotation based on the **IRGSP-1.0**
+reference genome (also known as MSU7).
+
+The package provides genomic coordinates and transcript models, including
+genes, transcripts, exons, and coding sequences (CDS). It supports downstream
+genomic analyses using Bioconductor packages such as **GenomicFeatures**,
+**GenomicRanges**, **Signac**, **ArchR**, and **ChIPseeker**.
+
+The TxDb SQLite resource is retrieved from **AnnotationHub**.
+
+# Installation
+
+This package is currently available in the Bioconductor development repository
+(Bioconductor 3.24) and requires R 4.6.0 or later.
+
+Install the development version of Bioconductor and then the package:
+
+```{r install, eval=FALSE}
+if (!requireNamespace("BiocManager", quietly = TRUE)) {
+    install.packages("BiocManager")
+}
+
+BiocManager::install(version = "devel")
+
+BiocManager::install(c(
+    "TxDb.Osativa.MSU.RGAP7",
+    "AnnotationHub",
+    "GenomicFeatures",
+    "GenomicRanges"
+))
+```
+
+For details about the R version required for the development branch, see the
+[Bioconductor installation instructions](https://bioconductor.org/install/).
+
+# Loading packages
+
+```{r loading, message=FALSE, warning=FALSE}
+library(TxDb.Osativa.MSU.RGAP7)
+library(AnnotationHub)
+library(GenomicFeatures)
+library(GenomicRanges)
+```
+
+# Retrieve the TxDb object from AnnotationHub
+
+The TxDb object is available through `AnnotationHub`:
+
+```{r annotationhub, message=FALSE, warning=FALSE}
+ah <- AnnotationHub::AnnotationHub()
+txdb <- ah[["AH122276"]]
+```
+
+Check the class of the retrieved object:
+
+```{r class}
+class(txdb)
+```
+
+# TxDb summary
+
+Display the transcript database:
+
+```{r summary}
+txdb
+```
+
+A summary can also be obtained with:
+
+```{r summary-function}
+summary(txdb)
+```
+
+# Chromosome information
+
+The chromosome and sequence information can be examined with `seqinfo()`:
+
+```{r chromosome}
+seqinfo(txdb)
+```
+
+# Available chromosomes
+
+The available sequence levels can be obtained with:
+
+```{r available-chromosomes}
+seqlevels(txdb)
+```
+
+The reference FASTA used to construct the database contains 12 nuclear
+chromosomes, unanchored sequences (`ChrUn`), and the Syngenta pseudomolecule
+(`ChrSy`).
+
+`ChrUn` represents unanchored sequences that could not be placed on a
+chromosome. `ChrSy` represents the Syngenta pseudomolecule, a separate
+sequence included in the RGAP7 reference FASTA.
+
+# Annotation import considerations
+
+During import of the RGAP Release 7 GFF3 file, `txdbmaker` reports some CDS
+features with missing or invalid phase values. It also excludes 88 transcript
+models for which one or more CDS features cannot be mapped to a corresponding
+exon under the importer's containment rules. Inspection of these records found
+89 unmatched CDS features. The original GFF3 coordinates were retained
+without manual modification.
+
+These exclusions reflect limitations or inconsistencies in the source
+annotation relative to the TxDb import requirements; they should not be
+interpreted as evidence that the corresponding biological transcripts do not
+exist.
+
+# Gene annotations
+
+Retrieve all annotated genes:
+
+```{r gene-annotations}
+gene_annotations <- genes(txdb)
+gene_annotations
+```
+
+# Transcript annotations
+
+Retrieve transcript annotations:
+
+```{r transcript-annotations}
+transcript_annotations <- transcripts(txdb)
+head(transcript_annotations)
+```
+
+# Exon annotations
+
+Retrieve exon annotations:
+
+```{r exon-annotations}
+exon_annotations <- exons(txdb)
+head(exon_annotations)
+```
+
+# Coding sequence (CDS) annotations
+
+Retrieve coding sequence annotations:
+
+```{r cds}
+cds_annotations <- cds(txdb)
+head(cds_annotations)
+```
+
+# Promoter regions
+
+Extract promoter regions 2 kb upstream and 200 bp downstream of transcription
+start sites:
+
+```{r promoters}
+promoter_annotations <- promoters(
+    txdb,
+    upstream = 2000,
+    downstream = 200
+)
+head(promoter_annotations)
+```
+
+# Transcripts grouped by gene
+
+Transcripts can be grouped by gene using `transcriptsBy()`:
+
+```{r transcripts-by-gene}
+tx_by_gene <- GenomicFeatures::transcriptsBy(
+    txdb,
+    by = "gene"
+)
+tx_by_gene
+```
+
+# Exons grouped by transcript
+
+Exons can be grouped by transcript using `exonsBy()`:
+
+```{r exons-by-transcript}
+exons_by_transcript <- GenomicFeatures::exonsBy(
+    txdb,
+    by = "tx"
+)
+exons_by_transcript
+```
+
+# Converting MSU identifiers to RAP-DB identifiers
+
+Gene models in this database are keyed by MSU locus identifiers
+(`LOC_Os##g#####`). Many rice resources instead use RAP-DB identifiers
+(`Os##g#######`). The `msu_to_rap()` function translates between the two,
+preserving input order and dropping identifiers that cannot be converted.
+
+```{r msu-to-rap}
+if (requireNamespace("riceidconverter", quietly = TRUE)) {
+    msu_ids <- c(
+        "LOC_Os01g01010",
+        "LOC_Os01g01019",
+        "LOC_Os01g01040"
+    )
+
+    rap_ids <- msu_to_rap(msu_ids)
+    print(rap_ids)
+}
+```
+
+# Session information
+
+```{r sessioninfo}
+sessionInfo()
+```
