@@ -1,8 +1,5 @@
 export(msu_to_rap)
 importFrom(stats,setNames)
-#'@import GenomicFeatures()
-#'@import AnnotationHub()
-#'@import GenomicRanges()
 
 ### The TxDb.Osativa.MSU.RGAP7 object is not shipped in, or exported by,
 ### this package: it is hosted on AnnotationHub and retrieved at runtime
