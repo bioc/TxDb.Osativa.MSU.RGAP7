@@ -53,4 +53,7 @@
 
 ## Version 0.99.10 (2026-11-02)
 
-- Fixed the bugs.
+- Improved the TxDb data-generation and sequence-information validation.
+- Removed the package-specific get_rice_txdb() retrieval helper; users retrieve
+  the hosted database directly through AnnotationHub.
+- Updated package documentation and installation instructions.
