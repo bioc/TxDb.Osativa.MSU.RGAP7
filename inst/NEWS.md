@@ -50,3 +50,7 @@
 ## Version 0.99.9 (2026-09-04)
 
 - Fixed the WARNINGS.
+
+## Version 0.99.10 (2026-11-02)
+
+- Fixed the bugs.
