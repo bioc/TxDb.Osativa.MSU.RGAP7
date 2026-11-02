@@ -29,15 +29,15 @@ Description:
 Depends:
     R (>= 4.6.0)
 Imports:
-    stats,
-    GenomicFeatures,
-    GenomicRanges,
-    AnnotationHub
+    stats
 Suggests:
     AnnotationDbi,
+    AnnotationHub,
     BiocManager,
     BiocStyle,
     Biostrings,
+    GenomicFeatures,
+    GenomicRanges,
     GenomeInfoDb,
     knitr,
     riceidconverter,
