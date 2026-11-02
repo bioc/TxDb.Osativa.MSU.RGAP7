@@ -1,6 +1,6 @@
 export(get_rice_txdb)
 export(msu_to_rap)
-import(GenomicFeatures)
+importClassesFrom(GenomicFeatures,TxDb)
 importFrom(AnnotationHub,AnnotationHub)
 importFrom(stats,setNames)
 
