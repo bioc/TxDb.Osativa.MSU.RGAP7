@@ -4,7 +4,7 @@
 \alias{TxDb.Osativa.MSU.RGAP7-package}
 \alias{TxDb.Osativa.MSU.RGAP7}
 
-\title{Annotation package for TxDb object(s)}
+\title{Transcript annotation database for rice}
 
 \description{
   This package provides access to a TxDb object for \emph{Oryza sativa}
@@ -13,9 +13,9 @@
   gene ranges for the IRGSP-1.0 / MSU7 genome assembly.
 
   The TxDb object itself is not shipped with the package: it is hosted
-  on AnnotationHub and retrieved at runtime, as shown below. The
-  package additionally provides \code{\link{msu_to_rap}} for converting
-  MSU locus identifiers to RAP-DB identifiers.
+  on AnnotationHub and retrieved at runtime using the AnnotationHub
+  package. The package additionally provides \code{\link{msu_to_rap}}
+  for converting MSU locus identifiers to RAP-DB identifiers.
 }
 
 \note{
@@ -36,21 +36,10 @@
 }
 
 \examples{
-## The TxDb object is downloaded from AnnotationHub, so this example is
-## only run when AnnotationHub is installed and the resource is
-## reachable.
-if (requireNamespace("AnnotationHub", quietly=TRUE)) {
-    txdb <- tryCatch({
-        ah <- AnnotationHub::AnnotationHub()
-        ah[["AH122276"]]
-    }, error=function(e) NULL)
-
-    if (!is.null(txdb)) {
-        txdb
-        ## retrieve all genes
-        GenomicFeatures::genes(txdb)
-    }
-}
+## Retrieve the TxDb from AnnotationHub (requires network access):
+## ah <- AnnotationHub::AnnotationHub()
+## txdb <- ah[["AH122276"]]
+## GenomicFeatures::genes(txdb)
 }
 
 \keyword{package}
