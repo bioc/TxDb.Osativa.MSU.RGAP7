@@ -52,16 +52,19 @@ For details about the R version required for the development branch, see the
 
 ```{r loading, message=FALSE, warning=FALSE}
 library(TxDb.Osativa.MSU.RGAP7)
+library(AnnotationHub)
 library(GenomicFeatures)
 library(GenomicRanges)
 ```
 
 # Retrieve the TxDb object from AnnotationHub
 
-The TxDb object is available through `AnnotationHub`:
+The TxDb object is available through `AnnotationHub`. The package resource
+is identified by `AH122276`:
 
 ```{r annotationhub, message=FALSE, warning=FALSE}
-txdb <- get_rice_txdb()
+ah <- AnnotationHub()
+txdb <- ah[["AH122276"]]
 ```
 
 Check the class of the retrieved object:
