@@ -13,9 +13,10 @@
 #' @return A `TxDb` object for `Oryza sativa` (RGAP Release 7 / IRGSP-1.0).
 #'
 #' @examples
-#' \\dontrun{
-#' txdb <- get_rice_txdb()
-#' }
+#' formals(get_rice_txdb)
+#'
+#' # To retrieve the resource from AnnotationHub (requires network access):
+#' # txdb <- get_rice_txdb()
 #'
 #' @export
 get_rice_txdb <- function(hub = AnnotationHub()) {
