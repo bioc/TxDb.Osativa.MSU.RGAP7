@@ -14,7 +14,7 @@ if (!requireNamespace("BiocManager", quietly = TRUE)) {
 }
 
 BiocManager::install(version = "devel")
-BiocManager::install("TxDb.Osativa.MSU.RGAP7")
+BiocManager::install(c(\n    "TxDb.Osativa.MSU.RGAP7",\n    "GenomicFeatures",\n    "GenomicRanges"\n))
 ```
 
 See the [Bioconductor installation instructions](https://bioconductor.org/install/) for information about the R version required for the development branch.
