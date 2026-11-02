@@ -24,6 +24,7 @@ See the [Bioconductor installation instructions](https://bioconductor.org/instal
 The TxDb SQLite resource is hosted on AnnotationHub and is downloaded when requested.
 
 ```r
+library(TxDb.Osativa.MSU.RGAP7)
 library(AnnotationHub)
 library(GenomicFeatures)
 
