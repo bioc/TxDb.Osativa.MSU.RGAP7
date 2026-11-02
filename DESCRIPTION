@@ -20,19 +20,19 @@ Description:
     (rice) as a Bioconductor TxDb object, generated from the Rice
     Genome Annotation Project (RGAP) Release 7 / MSU7 GFF3 file
     (genome assembly IRGSP-1.0). The TxDb object is distributed
-    through AnnotationHub and is retrieved with AnnotationHub(); once
-    loaded it can be queried with standard GenomicFeatures accessors
-    such as genes(), transcripts(), exonsBy(), and cdsBy() to obtain
-    gene models keyed by MSU locus identifiers. The package also
-    provides msu_to_rap() for translating MSU locus identifiers into
-    RAP-DB identifiers.
+    through AnnotationHub and can be retrieved with get_rice_txdb();
+    once loaded it can be queried with standard GenomicFeatures
+    accessors such as genes(), transcripts(), exonsBy(), and cdsBy()
+    to obtain gene models keyed by MSU locus identifiers. The package
+    also provides msu_to_rap() for translating MSU locus identifiers
+    into RAP-DB identifiers.
 Depends:
     R (>= 4.6.0)
 Imports:
+    AnnotationHub,
     stats
 Suggests:
     AnnotationDbi,
-    AnnotationHub,
     BiocManager,
     BiocStyle,
     Biostrings,
