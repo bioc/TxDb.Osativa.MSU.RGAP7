@@ -1,9 +1,2 @@
-export(get_rice_txdb)
 export(msu_to_rap)
 importClassesFrom(GenomicFeatures,TxDb)
-importFrom(AnnotationHub,AnnotationHub)
-importFrom(stats,setNames)
-
-### The TxDb.Osativa.MSU.RGAP7 object is not shipped in, or exported by,
-### this package: it is hosted on AnnotationHub and retrieved at runtime
-### (see the vignette).
