@@ -30,13 +30,13 @@ Depends:
     R (>= 4.6.0)
 Imports:
     AnnotationHub,
+    GenomicFeatures,
     stats
 Suggests:
     AnnotationDbi,
     BiocManager,
     BiocStyle,
     Biostrings,
-    GenomicFeatures,
     GenomicRanges,
     GenomeInfoDb,
     knitr,
