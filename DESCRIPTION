@@ -34,12 +34,16 @@ Imports:
     GenomicRanges,
     AnnotationHub
 Suggests:
+    AnnotationDbi,
     BiocManager,
     BiocStyle,
+    Biostrings,
+    GenomeInfoDb,
     knitr,
     riceidconverter,
     rmarkdown,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    txdbmaker
 VignetteBuilder: knitr
 License: Artistic-2.0
 Encoding: UTF-8
