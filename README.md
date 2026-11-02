@@ -61,6 +61,12 @@ cdsBy(txdb, by = "tx")
 
 ## Converting MSU identifiers to RAP-DB identifiers
 
+Load the package to use its `msu_to_rap()` helper:
+
+```r
+library(TxDb.Osativa.MSU.RGAP7)
+```
+
 Gene models are keyed by MSU locus identifiers (`LOC_Os##g#####`). The
 `msu_to_rap()` function translates these to RAP-DB identifiers
 (`Os##g#######`). Input order is preserved, and identifiers that cannot be
