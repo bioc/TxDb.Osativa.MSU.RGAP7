@@ -4,7 +4,7 @@ author: "Kabilan S"
 date: "2026-11-02"
 output: BiocStyle::html_document
 vignette: >
-  %\\VignetteIndexEntry{Transcript Annotation for Oryza sativa (RGAP Release 7)}
+  %\VignetteIndexEntry{Transcript Annotation for Oryza sativa (RGAP Release 7)}
   %\\VignetteEngine{knitr::rmarkdown}
   %\\VignetteEncoding{UTF-8}
 ---
