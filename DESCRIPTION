@@ -1,6 +1,6 @@
 Package: TxDb.Osativa.MSU.RGAP7
-Title: Transcripts Annotation Database for Rice
-Version: 0.99.9
+Title: Transcript Annotation Database for Rice
+Version: 0.99.10
 Authors@R:
     c(
       person("Dwijesh Chandra", "Mishra",
