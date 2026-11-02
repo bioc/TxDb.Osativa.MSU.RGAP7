@@ -4,7 +4,7 @@
 #' The resource corresponds to the RGAP Release 7 / MSU7 annotation and the
 #' IRGSP-1.0 reference genome.
 #'
-#' @import GenomicFeatures
+#' @importClassesFrom GenomicFeatures TxDb
 #' @importFrom AnnotationHub AnnotationHub
 #' @param hub An `AnnotationHub` object. By default, a new AnnotationHub
 #'   instance is created. Supplying an existing object allows reuse of an
