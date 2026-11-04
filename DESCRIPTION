@@ -27,7 +27,7 @@ Description:
     also provides msu_to_rap() for translating MSU locus identifiers
     into RAP-DB identifiers.
 Depends:
-    R (>= 4.6.0)
+    R (>= 4.5.0)
 Imports:
     GenomicFeatures
 Suggests:
