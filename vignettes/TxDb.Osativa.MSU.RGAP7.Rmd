@@ -1,52 +1,37 @@
 ---
-title: "Transcript Annotation for *Oryza sativa* (RGAP Release 7)"
+title: "Transcript Annotation for Oryza sativa (RGAP Release 7)"
 author: "Kabilan S"
-date: "2026-11-02"
 output: BiocStyle::html_document
 vignette: >
-  %\VignetteIndexEntry{Transcript Annotation for Oryza sativa (RGAP Release 7)}
+  %\VignetteIndexEntry{TxDb.Osativa.MSU.RGAP7}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
 # Introduction
 
-**TxDb.Osativa.MSU.RGAP7** is a Bioconductor transcript annotation package
-for *Oryza sativa* generated from the official **Rice Genome Annotation
-Project (RGAP) Release 7** GFF3 annotation based on the **IRGSP-1.0**
-reference genome (also known as MSU7).
+`TxDb.Osativa.MSU.RGAP7` is a Bioconductor transcript annotation package
+for *Oryza sativa* (rice) generated from the official **Rice Genome
+Annotation Project (RGAP) Release 7** GFF3 annotation based on the
+**IRGSP-1.0** reference genome assembly (also known as MSU7).
 
 The package provides genomic coordinates and transcript models, including
 genes, transcripts, exons, and coding sequences (CDS). It supports downstream
 genomic analyses using Bioconductor packages such as **GenomicFeatures**,
-**GenomicRanges**, **Signac**, **ArchR**, and **ChIPseeker**.
+**GenomicRanges**, **Signac**, and **ChIPseeker**.
 
 The TxDb SQLite resource is retrieved from **AnnotationHub**.
 
 # Installation
 
-This package is currently available in the Bioconductor development repository
-(Bioconductor 3.24) and requires R 4.6.0 or later.
-
-Install the development version of Bioconductor and then the package:
+Install the package from Bioconductor with:
 
 ```{r install, eval=FALSE}
 if (!requireNamespace("BiocManager", quietly = TRUE)) {
     install.packages("BiocManager")
 }
-
-BiocManager::install(version = "devel")
-
-BiocManager::install(c(
-    "TxDb.Osativa.MSU.RGAP7",
-    "AnnotationHub",
-    "GenomicFeatures",
-    "GenomicRanges"
-))
+BiocManager::install("TxDb.Osativa.MSU.RGAP7")
 ```
-
-For details about the R version required for the development branch, see the
-[Bioconductor installation instructions](https://bioconductor.org/install/).
 
 # Loading packages
 
@@ -63,7 +48,7 @@ The TxDb object is available through `AnnotationHub`. The package resource
 is identified by `AH122276`:
 
 ```{r annotationhub, message=FALSE, warning=FALSE}
-ah <- AnnotationHub()
+ah <- AnnotationHub::AnnotationHub()
 txdb <- ah[["AH122276"]]
 ```
 
@@ -87,15 +72,13 @@ A summary can also be obtained with:
 summary(txdb)
 ```
 
-# Chromosome information
+# Sequence information
 
-The chromosome and sequence information can be examined with `seqinfo()`:
+The sequence and chromosome information can be examined with `seqinfo()`:
 
 ```{r chromosome}
 seqinfo(txdb)
 ```
-
-# Available chromosomes
 
 The available sequence levels can be obtained with:
 
@@ -107,10 +90,6 @@ The reference FASTA used to construct the database contains 12 nuclear
 chromosomes, unanchored sequences (`ChrUn`), and the Syngenta pseudomolecule
 (`ChrSy`).
 
-`ChrUn` represents unanchored sequences that could not be placed on a
-chromosome. `ChrSy` represents the Syngenta pseudomolecule, a separate
-sequence included in the RGAP7 reference FASTA.
-
 # Annotation import considerations
 
 During import of the RGAP Release 7 GFF3 file, `txdbmaker` reports some CDS
@@ -120,10 +99,9 @@ exon under the importer's containment rules. Inspection of these records found
 89 unmatched CDS features. The original GFF3 coordinates were retained
 without manual modification.
 
-These exclusions reflect limitations or inconsistencies in the source
-annotation relative to the TxDb import requirements; they should not be
-interpreted as evidence that the corresponding biological transcripts do not
-exist.
+These exclusions reflect limitations in the source annotation relative to
+the TxDb import requirements; they should not be interpreted as evidence that
+the corresponding biological transcripts do not exist.
 
 # Gene annotations
 
@@ -163,8 +141,8 @@ head(cds_annotations)
 
 # Promoter regions
 
-Extract promoter regions 2 kb upstream and 200 bp downstream of transcription
-start sites:
+Extract promoter regions 2 kb upstream and 200 bp downstream of
+transcription start sites:
 
 ```{r promoters}
 promoter_annotations <- promoters(
